@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webgate-ws-csharp", "webgate-ws-csharp.csproj", "{EBE3AA06-1813-438A-9937-829B4199BF07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Ubuntu|Any CPU = Debug_Ubuntu|Any CPU
+		Debug_Ubuntu|Mixed Platforms = Debug_Ubuntu|Mixed Platforms
+		Debug_Ubuntu|x86 = Debug_Ubuntu|x86
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release_Ubuntu|Any CPU = Release_Ubuntu|Any CPU
+		Release_Ubuntu|Mixed Platforms = Release_Ubuntu|Mixed Platforms
+		Release_Ubuntu|x86 = Release_Ubuntu|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug_Ubuntu|Any CPU.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug_Ubuntu|Mixed Platforms.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug_Ubuntu|Mixed Platforms.Build.0 = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug_Ubuntu|x86.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug_Ubuntu|x86.Build.0 = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug|x86.ActiveCfg = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Debug|x86.Build.0 = Debug|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release_Ubuntu|Any CPU.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release_Ubuntu|Mixed Platforms.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release_Ubuntu|Mixed Platforms.Build.0 = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release_Ubuntu|x86.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release_Ubuntu|x86.Build.0 = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release|Any CPU.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release|Mixed Platforms.Build.0 = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release|x86.ActiveCfg = Release|x86
+		{EBE3AA06-1813-438A-9937-829B4199BF07}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
