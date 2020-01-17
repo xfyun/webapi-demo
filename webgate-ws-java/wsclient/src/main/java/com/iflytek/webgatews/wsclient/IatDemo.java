@@ -125,9 +125,8 @@ public class IatDemo extends WebSocketListener {
                             common.addProperty("app_id", appid);
                             //填充business
                             business.addProperty("aue", "raw");
-                            business.addProperty("ent", "xfime");
-                            business.addProperty("vinfo", 1);
-                            business.addProperty("svad", 1);
+                            business.addProperty("language", "zh_cn");
+                            business.addProperty("domain", "iat");
                             business.addProperty("accent", "mandarin");
                             //  business.addProperty("dwa", "wpgs");
                             //填充data
