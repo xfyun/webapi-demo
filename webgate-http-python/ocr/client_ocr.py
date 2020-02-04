@@ -39,10 +39,9 @@ class get_result(object):
         #设置测试音频文件
         self.AudioPath="./ocr.jpg"
         self.BusinessArgs={
-                "ent":"fingerocr",
-                "mode":"finger+ocr",
-                "gpu_id":"1",
-                "method":"dynamic",
+                "ent":"xx",
+                "mode":"xx",
+                "method":"xx",
                 "sub":"ocr"
             }
 
@@ -127,7 +126,7 @@ class get_result(object):
             if status_code!=200:
                 code=status_code
                 sid=''
-                info='http status is not 200'
+                info= response.content
                 delay=interval
             else:
                 respData = json.loads(response.text)
@@ -138,10 +137,10 @@ class get_result(object):
         except Exception as e:
             code = 500
             sid = ''
-            info= "occur exception"
+            info= e.message
             delay = interval
         a_dic['code'] = code
-        a_dic['info'] = info
+        a_dic['info'] = "%s" % str(info)
         a_dic['time'] = delay
         print(json.dumps(a_dic))
         #print ([code, sid,info, delay])

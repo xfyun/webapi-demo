@@ -27,7 +27,7 @@ class get_result(object):
              #print(host)
              self.url="https://"+host+self.RequestUri
         self.HttpMethod = "POST"
-        self.APPID = "565fb083"
+        self.APPID = "5xxxx"
         self.Algorithm = "hmac-sha256"
         self.HttpProto = "HTTP/1.1"
         self.UserName="4c2fxxxxxxxxxxxxxxxxx"
@@ -37,10 +37,10 @@ class get_result(object):
         curTime_utc = datetime.datetime.utcnow()
         self.Date = self.httpdate(curTime_utc)
         #设置测试音频文件
-        self.AudioPath="./xiao.pcm"
+        self.AudioPath="./iat.pcm"
         self.BusinessArgs={
                 "language": "zh_cn",
-                "domain":   "vanke",
+                "domain":    "xx",
                 "accent":   "mandarin",
             }
 
@@ -128,7 +128,7 @@ class get_result(object):
             if status_code!=200:
                 code=status_code
                 sid=''
-                info='http status is not 200'
+                info=response.content
                 delay=interval
             else:
                 respData = json.loads(response.text)
@@ -139,10 +139,10 @@ class get_result(object):
         except Exception as e:
             code = 500
             sid = ''
-            info= "occur exception"
+            info= e.message 
             delay = interval
         a_dic['code'] = code
-        a_dic['info'] = info
+        a_dic['info'] = "%s" % str(info) 
         a_dic['time'] = delay
         print(json.dumps(a_dic))
         #print ([code, sid,info, delay])
