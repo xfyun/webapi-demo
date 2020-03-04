@@ -1,4 +1,4 @@
-package main
+spackage main
 
 import (
 	"encoding/json"
@@ -150,7 +150,6 @@ func main() {
 	var reqParam = RequestParam{
 		Common:   commonParam,
 		Business: bussinessParam,
-		Data:     data,
 	}
 
 	client := &fasthttp.Client{}
