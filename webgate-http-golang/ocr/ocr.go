@@ -117,10 +117,9 @@ func main() {
 		Image: contentByte,
 	}
 	var bussinessParam = map[string]interface{}{
-		"ent":    "fingerocr",
-		"mode":   "finger+ocr",
-		"gpu_id": "1",
-		"method": "dynamic",
+		"ent":   "xx",
+		"mode":   "xx",
+		"method": "xx",
 		"sub":    "ocr",
 	}
 	var commonParam = map[string]string{
