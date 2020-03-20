@@ -38,7 +38,7 @@ public class IatResonse  extends Response {
 
     @Override
     public String toString() {
-        return "IatResonse{" +
+        return "IgrResonse{" +
                 "super="+super.toString()+
                 "data=" + data +
                 '}';

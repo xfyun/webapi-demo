@@ -2,6 +2,7 @@ package com.iflytek.webapi.igrpool;
 
 import com.iflytek.webapi.utils.JsonUtil;
 import com.iflytek.webapi.wspool.IResponse;
+import com.iflytek.webapi.wspool.URIBuilder;
 import com.iflytek.webapi.wspool.WsConnection;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -12,7 +13,9 @@ public class IgrWsConnection extends WsConnection implements Runnable{
     public IgrWsConnection(URI serverUri) {
         super(serverUri);
     }
-
+    public IgrWsConnection(String url, URIBuilder builder){
+        super(url, builder);
+    }
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
         System.out.println("success open websocket connection");

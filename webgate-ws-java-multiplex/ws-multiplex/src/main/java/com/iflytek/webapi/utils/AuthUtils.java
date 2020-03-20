@@ -27,12 +27,15 @@ public class AuthUtils {
      */
     public static String assembleRequestUrl(String requestUrl, String apiKey, String apiSecret) {
         URL url = null;
+        // 替换调schema前缀 ，原因是URL库不支持解析包含ws,wss schema的url
         String  httpRequestUrl = requestUrl.replace("ws://", "http://").replace("wss://","https://" );
         try {
             url = new URL(httpRequestUrl);
+            //获取当前日志并格式化
             SimpleDateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
             format.setTimeZone(TimeZone.getTimeZone("GMT"));
             String date = format.format(new Date());
+
             String host = url.getHost();
             if (url.getPort()!=80 && url.getPort() !=443){
                 host = host +":"+String.valueOf(url.getPort());
