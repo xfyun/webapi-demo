@@ -102,6 +102,7 @@ class get_result(object):
     def get_body(self):
         audioData = self.imgRead((self.AudioPath))
         content = base64.b64encode(audioData).decode(encoding='utf-8')
+        print(content)
         postdata = {
             "common": {"app_id": self.APPID},
             "business": self.BusinessArgs,
