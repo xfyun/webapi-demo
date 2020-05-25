@@ -2,6 +2,7 @@ package com.iflytek.webapi.iatpool;
 
 import com.iflytek.webapi.utils.JsonUtil;
 import com.iflytek.webapi.wspool.IResponse;
+import com.iflytek.webapi.wspool.URIBuilder;
 import com.iflytek.webapi.wspool.WsConnection;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -13,6 +14,9 @@ public class IatWsConnection extends WsConnection implements Runnable{
         super(serverUri);
     }
 
+    public IatWsConnection(String url, URIBuilder builder){
+        super(url, builder);
+    }
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
         System.out.println("success open websocket connection");
@@ -32,6 +36,7 @@ public class IatWsConnection extends WsConnection implements Runnable{
     protected void onException(Exception e) {
         e.printStackTrace();
     }
+
     @Override
     public IResponse decode(String s) {
         return  JsonUtil.fromJson(s,IatResonse.class );

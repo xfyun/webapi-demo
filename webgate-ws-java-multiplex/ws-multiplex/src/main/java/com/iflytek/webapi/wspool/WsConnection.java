@@ -9,10 +9,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class WsConnection extends WebSocketClient {
 
+    private String url;
+
     public WsConnection(URI serverUri) {
         super(serverUri);
     }
 
+    public WsConnection(String url,URIBuilder builder){
+        super(builder.newURI(url));
+        this.url =url;
+    }
     public WsConnection(URI serverUri, Draft protocolDraft) {
         super(serverUri, protocolDraft);
     }
@@ -27,6 +33,7 @@ public abstract class WsConnection extends WebSocketClient {
         callback.remove(client.getCid().toString());
     }
 
+    private URIBuilder uriBuilder;
     @Override
     public void onMessage(String s) {
         IResponse response = decode(s);
@@ -40,6 +47,14 @@ public abstract class WsConnection extends WebSocketClient {
             }
         }
 
+    }
+
+    @Override
+    public boolean reconnectBlocking() throws InterruptedException {
+        if (this.uriBuilder!= null){
+            this.uri = this.uriBuilder.newURI(this.url);
+        }
+        return super.reconnectBlocking();
     }
 
     public int getSesionNum() {
@@ -58,7 +73,10 @@ public abstract class WsConnection extends WebSocketClient {
     @Override
     public void onError(Exception e) {
         closeConnection();
+        onException(e);
     }
+
+
 
     @Override
     public void close() {

@@ -1,24 +1,32 @@
 package com.iflytek.webapi.ttspool;
+import com.iflytek.webapi.iatpool.IatConnectonFactory;
 import com.iflytek.webapi.utils.AuthUtils;
 import com.iflytek.webapi.wspool.WsPool;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Test {
 
     public static final String serverUrl = "ws://tts-api.xfyun.cn/v2/tts";
-
-    public static final String apiKey = "xxxxxxxxxxxxxxxxxxxxxxxx";
-
-    public static final String apiSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-
-    public static final String appid = "xxxxxx";
+//    public static final String apiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    public static final String apiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+//    public static final String apiSecret = "xxxxxxxxxxxxxxxxxxxxxxxx";
+    public static final String apiSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+//    public static final String appid = "xxxxxxx";
+    public static final String appid = "xxxxxxx";
 
     public static final String  file = "tts.txt";   // 合成文本
-	
     public static void main(String[] args){
 
-        String url = AuthUtils.assembleRequestUrl(serverUrl, apiKey, apiSecret);
-        url = url+"&stream_mode=multiplex";//开启长连接多路复用模式
-        WsPool pool = new WsPool(url, new TTSConnectonFactory(), 1);
+        WsPool pool = new WsPool(new TTSConnectonFactory(serverUrl,o->{
+            try {
+                return new URI( AuthUtils.assembleRequestUrl(o, apiKey, apiSecret)+"&stream_mode=multiplex");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }), 1);
         try {
             pool.init();
         } catch (Exception e) {

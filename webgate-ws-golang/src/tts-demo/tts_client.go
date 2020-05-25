@@ -138,7 +138,7 @@ func (c *Client) sendFrame(status int, data []byte) {
 			"device.imsi":"23344543",
 		},
 		"business": map[string]interface{}{
-			"aue":   "raw",
+			"aue":   "speex-wb;7",
 			"tte":   "UTF8",
 			//"vcn":   "x_catherine",
 			"vcn":   "xiaoyan",

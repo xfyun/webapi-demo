@@ -20,7 +20,7 @@ public class IatDemo extends WebSocketListener {
     private static final String apiKey = "xxxxxxxxxxxxxxx";
     private static final String apiSecret = "xxxxxxxxxxxxxxxxxxxxxxxx";
     private static final String appid = "565fb083";
-    private static final String file = "0.pcm";
+    private static final String file = "ygf.Speex";
     public static final int StatusFirstFrame = 0;
     public static final int StatusContinueFrame = 1;
     public static final int StatusLastFrame = 2;
@@ -132,7 +132,7 @@ public class IatDemo extends WebSocketListener {
                             //填充data
                             data.addProperty("status", StatusFirstFrame);
                             data.addProperty("format", "audio/L16;rate=16000");
-                            data.addProperty("encoding", "raw");
+                            data.addProperty("encoding", "speex");
                             data.addProperty("audio", Base64.getEncoder().encodeToString(Arrays.copyOf(buffer, len)));
                             //填充frame
                             frame.add("common", common);
@@ -149,7 +149,7 @@ public class IatDemo extends WebSocketListener {
                             JsonObject data1 = new JsonObject();
                             data1.addProperty("status", StatusContinueFrame);
                             data1.addProperty("format", "audio/L16;rate=16000");
-                            data1.addProperty("encoding", "raw");
+                            data1.addProperty("encoding", "speex");
                             data1.addProperty("audio", Base64.getEncoder().encodeToString(Arrays.copyOf(buffer, len)));
                             frame1.add("data", data1);
                             webSocket.send(frame1.toString());
@@ -162,7 +162,7 @@ public class IatDemo extends WebSocketListener {
                             data2.addProperty("status", StatusLastFrame);
                             data2.addProperty("audio", "");
                             data2.addProperty("format", "audio/L16;rate=16000");
-                            data2.addProperty("encoding", "raw");
+                            data2.addProperty("encoding", "speex");
                             frame2.add("data", data2);
                             webSocket.send(frame2.toString());
                             System.out.println("sendlast");

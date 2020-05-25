@@ -1,4 +1,4 @@
-﻿package com.iflytek.webapi.wspool;
+package com.iflytek.webapi.wspool;
 
 import org.java_websocket.enums.ReadyState;
 
@@ -20,6 +20,7 @@ public class WsPool{
 
     private WsConnectionFactory factory ;
 
+
     public WsPool(String requestUrl, WsConnectionFactory factory, int size) {
         this.requestUrl = requestUrl;
         this.factory = factory;
@@ -27,6 +28,9 @@ public class WsPool{
         if(size <=0){
             this.size = 5;
         }
+    }
+    public WsPool(WsConnectionFactory factory,int size){
+        this("",factory,size);
     }
 
     /**
