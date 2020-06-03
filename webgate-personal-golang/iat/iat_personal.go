@@ -14,11 +14,11 @@ import (
 )
 
 const (
-	ApiKey="xxxx" //your api key
-	SecretKey="xxx" //your secret
+	ApiKey="xxxx"
+	SecretKey="xxx"
 )
 
-var appid = "xxx" //your appid 
+var appid = "xx"
 
 type RequestParam struct {
 	Common   map[string]string      `json:"common"`   //通用参数
@@ -30,17 +30,16 @@ type RequestParam struct {
 func uploadRequest() {
 
 	var bussinessParam = map[string]interface{}{
-		"type": "content",
+		"type": "contact",
 	}
 	var commonParam = map[string]string{
 		"app_id": appid,
-		"uid": "xxx",
+		"uid": "7049218823",//从venus获取的uid
 	}
-	dat, err := ioutil.ReadFile("demo/iat/contact") //your text
+	dat, err := ioutil.ReadFile("demo/iat/contact")
 	if err != nil {
 		panic(err)
 	}
-	//var Data = base64.StdEncoding.EncodeToString([]byte{11, 2, 2})
 	var Data = base64.StdEncoding.EncodeToString(dat)
 	var reqParam = RequestParam{
 		Common:   commonParam,
@@ -48,7 +47,9 @@ func uploadRequest() {
 		Data:     Data,
 	}
 	body, _ := json.Marshal(&reqParam)
+	fmt.Println("-------------------", string(body))
 	server_url:="https://evo.xfyun.cn/individuation/iat/upload"
+
 	req, err := http.NewRequest("POST", server_url, strings.NewReader(string(body)))
 	if err != nil {
 		fmt.Println("err is is ", err)
@@ -58,7 +59,7 @@ func uploadRequest() {
 	u, _ := url.Parse(server_url)
 	host := u.Host
 	requestUri := u.RequestURI()
-	assemblyRequestHeader(req, host, requestUri)
+	assemblyRequestHeader("POST",req, host, requestUri)
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("err is", err)
@@ -75,7 +76,7 @@ func deleteIat( ) {
 	}
 	var commonParam = map[string]string{
 		"app_id": appid,
-		"uid": "lhli3",
+		"uid": "7049218823",
 	}
 	var reqParam = RequestParam{
 		Common:   commonParam,
@@ -83,6 +84,7 @@ func deleteIat( ) {
 	}
 	body, _ := json.Marshal(&reqParam)
 	server_url:="https://evo.xfyun.cn/individuation/iat/content"
+
 	req, err := http.NewRequest("DELETE", server_url, strings.NewReader(string(body)))
 	if err != nil {
 		fmt.Println("err is is ", err)
@@ -92,7 +94,7 @@ func deleteIat( ) {
 	u, _ := url.Parse(server_url)
 	host := u.Host
 	requestUri := u.RequestURI()
-	assemblyRequestHeader(req, host, requestUri)
+	assemblyRequestHeader("DELETE",req, host, requestUri)
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("err is", err)
@@ -104,8 +106,9 @@ func deleteIat( ) {
 
 
 func downloadIat( ) {
+	
+	server_url:="http://evo.xfyun.cn/individuation/iat/content?app_id=5a1e585b&uid=7049218823&type=contact"
 
-	server_url:="https://evo.xfyun.cn/individuation/iat/content?app_id=xxx&uid=xxx&type=content"
 	req, err := http.NewRequest("GET", server_url,nil)
 	if err != nil {
 		fmt.Println("err is is ", err)
@@ -115,7 +118,7 @@ func downloadIat( ) {
 	u, _ := url.Parse(server_url)
 	host := u.Host
 	requestUri := u.RequestURI()
-	assemblyRequestHeader(req, host, requestUri)
+	assemblyRequestHeader("GET",req, host, requestUri)
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("err is", err)
@@ -126,7 +129,10 @@ func downloadIat( ) {
 }
 
 
-func assemblyRequestHeader(req *http.Request, host, path string) {
+
+
+
+func assemblyRequestHeader(method string ,req *http.Request, host, path string) {
 	//设置请求头 其中Host Date 必须有
 	req.Header.Set("Host", host)
 	//date必须是utc时区，且不能和服务器时间相差300s
@@ -137,9 +143,9 @@ func assemblyRequestHeader(req *http.Request, host, path string) {
 	//req.Header.Set("Digest", "SHA-256="+digest)
 	//根据请求头部内容，生成签名
 	sign := generateSignature(req.Header.Get("Host"), req.Header.Get("Date"),
-		"POST", path, "HTTP/1.1", SecretKey)
+		method, path, "HTTP/1.1", SecretKey)
 	//组装Authorization头部
-	var authHeader = `hmac api_key="` + ApiKey + `", algorithm="hmac-sha256", headers="host date request-line", signature="` + sign + `"`
+	var authHeader = `api_key="` + ApiKey + `", algorithm="hmac-sha256", headers="host date request-line", signature="` + sign + `"`
 	fmt.Println(authHeader)
 	req.Header.Set("Authorization", authHeader)
 }
@@ -176,7 +182,7 @@ func signBody(data []byte) string {
 	return base64.StdEncoding.EncodeToString(encodeData)
 }
 func main() {
-	uploadRequest()
-	downloadIat()
+	//uploadRequest()
+	//downloadIat()
 	deleteIat()
 }
