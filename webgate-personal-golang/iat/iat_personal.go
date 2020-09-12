@@ -14,15 +14,15 @@ import (
 )
 
 const (
-	ApiKey="xxxx"
-	SecretKey="xxx"
+	ApiKey="xxxx"  //替换申请的apikey
+	SecretKey="xxx"//替换申请的SecretKey
 )
 
 var appid = "xx"
 
 type RequestParam struct {
 	Common   map[string]string      `json:"common"`   //通用参数
-	Business map[string]interface{} `json:"business"` //业务参数
+	Business map[string]interface{} `json:"business,omitempty"` //业务参数
 	Data     string              `json:"data,omitempty"`     //请求数据
 }
 
@@ -50,7 +50,7 @@ func uploadRequest() {
 	fmt.Println("-------------------", string(body))
 	server_url:="https://evo.xfyun.cn/individuation/iat/upload"
 
-	req, err := http.NewRequest("POST", server_url, strings.NewReader(string(body)))
+	req, err := http.NewRequest("POST", server_url, bytes.NewReader(body))
 	if err != nil {
 		fmt.Println("err is is ", err)
 	}
@@ -69,6 +69,47 @@ func uploadRequest() {
 	fmt.Println(string(respBody))
 }
 
+//应用级个性化上传
+func uploadAppRequest() {
+
+
+	var commonParam = map[string]string{
+		"app_id": appid,
+	}
+	dat, err := ioutil.ReadFile("iat/contact_app")
+	if err != nil {
+		panic(err)
+	}
+	
+	var Data = base64.StdEncoding.EncodeToString(dat)
+	var reqParam = RequestParam{
+		Common:   commonParam,
+		//Business: bussinessParam,
+		Data:     Data,
+	}
+	body, _ := json.Marshal(&reqParam)
+	//fmt.Println("-------------------", string(body))
+	server_url:="http://evo-app.xfyun.cn/individuation/iat/app_upload" 
+	req, err := http.NewRequest("POST", server_url, bytes.NewReader(body))
+	if err != nil {
+		fmt.Println("err is is ", err)
+	}
+	client := &http.Client{}
+	req.Header.Set("Content-Type", "application/raw;16000")
+	u, _ := url.Parse(server_url)
+	host := u.Host
+	requestUri := u.RequestURI()
+	assemblyRequestHeader("POST", req, host, requestUri)
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("err is", err)
+		return
+	}
+	respBody, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(respBody))
+}
+
+
 func deleteIat( ) {
 	//上传返回的index
 	var bussinessParam = map[string]interface{}{
@@ -85,7 +126,7 @@ func deleteIat( ) {
 	body, _ := json.Marshal(&reqParam)
 	server_url:="https://evo.xfyun.cn/individuation/iat/content"
 
-	req, err := http.NewRequest("DELETE", server_url, strings.NewReader(string(body)))
+	req, err := http.NewRequest("DELETE", server_url, bytes.NewReader(body))
 	if err != nil {
 		fmt.Println("err is is ", err)
 	}
