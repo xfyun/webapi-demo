@@ -295,7 +295,7 @@ public class IatDemo extends WebSocketListener {
     }
 
     public static class Cw {
-        int sc;
+        double sc;
         String w;
 
     }
