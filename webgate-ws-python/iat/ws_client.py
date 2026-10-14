@@ -38,10 +38,10 @@ class Ws_Param(object):
         self.HttpProto = "HTTP/1.1"
         self.HttpMethod = "GET"
         self.RequestUri = "/v2/iat"
-        self.APPID = "565fb083"
+        self.APPID = "xxxx"
         self.Algorithm = "hmac-sha256"
-        self.UserName = "4c2f2a8f2fde911ed422291161c4c598"
-        self.Secret = "Tx7m1B5xx1wyEtfBeeso3pdUX6yzMg4p"
+        self.UserName = "xxxxxx"
+        self.Secret = "xxxxxxx"
         # 设置url
         if re.match("^\d", self.Host):
             self.url = "ws://" + self.Host + self.RequestUri
